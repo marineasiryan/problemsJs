@@ -1,11 +1,13 @@
-function split_by(str, delim) {
+function split_by(str, ...delim) {
     let elem = '';
     let result = [];
     for (let i = 0; i < str.length; ++i) {
-        if (str[i] === delim) {
-            result.push(elem);
-            elem = '';
-            str = str.replace(delim, '');
+        for(let char of delim) {
+            if (str[i] === char) {
+                result.push(elem);
+                elem = '';
+                str = str.replace(char, '');
+            }
         }
         elem += str[i];
     }
@@ -13,4 +15,4 @@ function split_by(str, delim) {
     console.log(result);
 }
 
-split_by('how, did i spend, summer holidays', ',')
+split_by('how, did i sp_end, sum_mer; holidays', ',', ';', '_')
